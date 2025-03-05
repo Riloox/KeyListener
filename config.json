@@ -1,0 +1,16 @@
+{
+  "actions": {
+    "a": {
+      "type": "print",
+      "message": "Action A triggered!"
+    },
+    "f": {
+      "type": "subprocess",
+      "command": ["C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"]
+    },
+	"n": {
+      "type": "subprocess",
+      "command": ["notepad.exe"]
+    }
+  }
+}
