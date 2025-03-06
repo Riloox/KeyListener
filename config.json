@@ -8,9 +8,21 @@
       "type": "subprocess",
       "command": ["C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"]
     },
-	"n": {
+    "d": {
+      "type": "subprocess",
+      "command": ["C:\\Users\\Administrator\\AppData\\Local\\Discord\\app-1.0.9185\\Discord.exe"]
+    },
+    "n": {
       "type": "subprocess",
       "command": ["notepad.exe"]
+    },
+    "w": {
+      "type": "open_webpage",
+      "url": "https://www.google.com"
+    },
+    "c": {
+      "type": "execute_code",
+      "code": "print('Hello, world!')"
     }
   }
 }

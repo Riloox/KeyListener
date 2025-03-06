@@ -5,7 +5,7 @@ The **KeyListener** program is a Python-based utility that listens for specific 
 ## Features
 
 - **Double Shift Detection**: Detects when the Shift key is pressed twice in quick succession.
-- **Custom Actions**: Executes user-defined actions (e.g., logging, running commands, or sleeping) based on key presses.
+- **Custom Actions**: Executes user-defined actions (e.g., logging, running commands, opening webpages, or executing Python code) based on key presses.
 - **Windows Startup Integration**: Can be added to or removed from Windows startup via command-line arguments.
 - **Logging**: Logs all events to a rotating log file (`keylistener.log`).
 - **Popup Notifications**: Displays a popup notification when the program is disabled (Shift + Shift + Escape).
@@ -38,8 +38,12 @@ The **KeyListener** program is a Python-based utility that listens for specific 
          "command": ["notepad.exe"]
        },
        "c": {
-         "type": "sleep",
-         "duration": 5
+         "type": "execute_code",
+         "code": "print('Hello, world!')"
+       },
+       "w": {
+         "type": "open_webpage",
+         "url": "https://www.google.com"
        }
      }
    }
@@ -49,6 +53,8 @@ The **KeyListener** program is a Python-based utility that listens for specific 
    - `print`: Logs a message.
    - `subprocess`: Runs a command.
    - `sleep`: Pauses for a specified duration.
+   - `open_webpage`: Opens a URL in the default web browser.
+   - `execute_code`: Executes Python code.
 
 4. **Run the Program**:
    Execute the script:
@@ -98,8 +104,12 @@ The program reads its configuration from `config.json`. Here’s an example conf
       "command": ["notepad.exe"]
     },
     "c": {
-      "type": "sleep",
-      "duration": 5
+      "type": "execute_code",
+      "code": "print('Hello, world!')"
+    },
+    "w": {
+      "type": "open_webpage",
+      "url": "https://www.google.com"
     }
   }
 }
@@ -128,3 +138,17 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - Inspired by the need for quick keyboard-triggered actions.
 
 ---
+
+### Screenshots
+
+#### Popup Notification
+![Popup Notification](https://via.placeholder.com/300x200.png?text=Popup+Notification)
+
+#### Log File Example
+```plaintext
+2023-10-01 12:00:00 - KeyListener started successfully!
+2023-10-01 12:00:05 - Double shift detected! Waiting for input...
+2023-10-01 12:00:07 - Handling letter: a
+2023-10-01 12:00:07 - Action A triggered!
+2023-10-01 12:00:10 - Escape pressed after double shift - stopping listener
+```

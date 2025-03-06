@@ -8,7 +8,6 @@ import sys
 import logging
 from logging.handlers import RotatingFileHandler
 import ctypes  # For popup notification
-import webbrowser  # For opening webpages
 
 # Set up logging with rotation
 log_handler = RotatingFileHandler(
@@ -75,27 +74,8 @@ def create_action(action_config):
         return lambda: subprocess.run(action_config.get('command', ['echo', 'No command']))
     elif action_type == 'sleep':
         return lambda: time.sleep(action_config.get('duration', 1))
-    elif action_type == 'open_webpage':
-        url = action_config.get('url', 'https://www.example.com')
-        return lambda: open_webpage(url)
-    elif action_type == 'execute_code':
-        code = action_config.get('code', 'print("No code specified")')
-        return lambda: execute_code(code)
     else:
         return lambda: logger.info(f"Unknown action type: {action_type}")
-
-def open_webpage(url):
-    """Open a webpage in the default web browser"""
-    logger.info(f"Opening webpage: {url}")
-    webbrowser.open(url)
-
-def execute_code(code):
-    """Execute Python code"""
-    logger.info(f"Executing code: {code}")
-    try:
-        exec(code)
-    except Exception as e:
-        logger.error(f"Error executing code: {e}")
 
 def on_press(key):
     global last_shift_time, shift_count, waiting_for_input
