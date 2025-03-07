@@ -86,6 +86,10 @@ def create_action(action_config):
 
 def open_webpage(url):
     """Open a webpage in the default web browser"""
+    # Ensure the URL starts with 'http://' or 'https://'
+    if not url.startswith(('http://', 'https://')):
+        url = f'https://{url}'  # Default to 'https://' if no protocol is specified
+    
     logger.info(f"Opening webpage: {url}")
     webbrowser.open(url)
 
