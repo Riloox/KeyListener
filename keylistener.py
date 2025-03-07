@@ -40,7 +40,15 @@ logger.info(f"Working directory set to: {script_dir}")
 # Load configuration from config.json
 def load_config():
     global actions
-    config_path = os.path.join(script_dir, 'config.json')
+    # Get the directory where the executable or script is located
+    if getattr(sys, 'frozen', False):
+        # Running as a bundled executable
+        base_path = os.path.dirname(sys.executable)
+    else:
+        # Running as a script
+        base_path = os.path.dirname(os.path.abspath(__file__))
+    
+    config_path = os.path.join(base_path, 'config.json')
     logger.info(f"Loading config from: {config_path}")
     
     try:
