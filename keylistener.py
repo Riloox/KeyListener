@@ -89,6 +89,12 @@ def create_action(action_config):
     elif action_type == 'execute_code':
         code = action_config.get('code', 'print("No code specified")')
         return lambda: execute_code(code)
+    elif action_type == 'powershell':
+        command = action_config.get('command', 'echo "No PowerShell command specified"')
+        return lambda: execute_shell_command(command, shell='powershell')
+    elif action_type == 'cmd':
+        command = action_config.get('command', 'echo "No CMD command specified"')
+        return lambda: execute_shell_command(command, shell='cmd')
     else:
         return lambda: logger.info(f"Unknown action type: {action_type}")
 
@@ -108,6 +114,19 @@ def execute_code(code):
         exec(code)
     except Exception as e:
         logger.error(f"Error executing code: {e}")
+
+def execute_shell_command(command, shell='powershell'):
+    """Execute a command in PowerShell or CMD"""
+    logger.info(f"Executing {shell} command: {command}")
+    try:
+        if shell == 'powershell':
+            subprocess.run(["powershell", "-Command", command], shell=True)
+        elif shell == 'cmd':
+            subprocess.run(["cmd", "/c", command], shell=True)
+        else:
+            logger.error(f"Unsupported shell: {shell}")
+    except Exception as e:
+        logger.error(f"Error executing {shell} command: {e}")
 
 def on_press(key):
     global last_shift_time, shift_count, waiting_for_input
